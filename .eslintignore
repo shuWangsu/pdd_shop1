@@ -1,0 +1,8 @@
+/build/
+/config/
+/dist/
+/*.js
+/src/
+/static/
+/pages/
+/*.html
