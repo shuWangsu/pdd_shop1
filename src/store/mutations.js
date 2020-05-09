@@ -3,7 +3,8 @@ import {
   HOME_NAV,
   HOME_SHOP_LIST,
   RECOMMEND_SHOP_LIST,
-  SEARCH_GOODS
+  SEARCH_GOODS,
+  USER_INFO
 } from './mutation-types'
 export default {
   [HOME_CASUAL](state,{homecasual}){
@@ -21,5 +22,8 @@ export default {
   },
   [SEARCH_GOODS](state,{searchgoods}){
     state.searchgoods = searchgoods
+  },
+  [USER_INFO](state,{userInfo}){
+    state.userInfo = userInfo
   },
 }

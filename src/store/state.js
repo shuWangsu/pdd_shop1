@@ -8,5 +8,7 @@ export default {
   // 推荐页面商品数据
   recommendshoplist: [],
   // 搜索列表
-  searchgoods: []
+  searchgoods: [],
+  // 用户数据
+  userInfo:{}
 }

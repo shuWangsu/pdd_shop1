@@ -10,7 +10,8 @@ import {
   HOME_NAV,
   HOME_SHOP_LIST,
   RECOMMEND_SHOP_LIST,
-  SEARCH_GOODS
+  SEARCH_GOODS,
+  USER_INFO
 } from './mutation-types'
 export default {
   // 获取首页轮播图
@@ -43,4 +44,8 @@ export default {
     console.log(result)
     commit(SEARCH_GOODS,{searchgoods:result.message.data})
   },
+  // 同步用户信息
+  syncUserInfo({commit},userInfo){
+    commit(USER_INFO,{userInfo})
+  }
 }
