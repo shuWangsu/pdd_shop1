@@ -8,7 +8,7 @@ import {
 } from './mutation-types'
 export default {
   [HOME_CASUAL](state,{homecasual}){
-    console.log(homecasual)
+    // console.log(homecasual)
     state.homecasual = homecasual
   },
   [HOME_NAV](state,{homenav}){

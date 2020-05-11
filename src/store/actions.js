@@ -3,7 +3,8 @@ import {
   getHomeNav,
   getHomeShopLit,
   getRecommendShopList,
-  getSearchGoods 
+  getSearchGoods,
+  getUserInfo 
 } from '../api'
 import {
   HOME_CASUAL,
@@ -41,11 +42,18 @@ export default {
   // 获取搜索也的商品数据
   async reqSearchGoods({commit}){
     const result = await getSearchGoods()
-    console.log(result)
+    // console.log(result)
     commit(SEARCH_GOODS,{searchgoods:result.message.data})
   },
   // 同步用户信息
   syncUserInfo({commit},userInfo){
     commit(USER_INFO,{userInfo})
+  },
+  // 异步获取用户信息
+  async getUserInfo({commit}){
+    const result = await getUserInfo()
+    if(result.success_code === 200) {
+      commit(USER_INFO,{userInfo:result.message})
+    }
   }
 }

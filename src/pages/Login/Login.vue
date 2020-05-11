@@ -92,7 +92,7 @@
                        v-model="captcha">
                 <img ref="captcha"
                      class="get-verification"
-                     src="http://localhost:3000/api/captcha"
+                     src="http://127.0.0.1:3000/api/captcha"
                      alt="captcha"
                      @click.prevent="getCaptcha()">
               </section>
@@ -109,7 +109,7 @@
 </template>
 
 <script>
-import { getPhoneCode, phoneCodeLogin } from './../../api/index.js'
+import { getPhoneCode, phoneCodeLogin,pwdLogin } from './../../api/index.js'
 import { Toast } from 'mint-ui'
 import {mapActions} from 'vuex'
 export default {
@@ -121,8 +121,8 @@ export default {
       pwdMode: true, //密码显示方式，true为密文，false为明文 
       pwd: '',  //密码
       src: '',
-      user_name: '',
-      captcha: '',
+      user_name: '',  //用户名
+      captcha: '',    
       code: '',  //验证码
       userInfo: {}
     }
@@ -166,7 +166,7 @@ export default {
     },
     // 获取图像验证码
     getCaptcha () {
-      this.$refs.captcha.src = 'http://localhost:3000/api/captcha?time=' + new Date()
+      this.$refs.captcha.src = 'http://127.0.0.1:3000/api/captcha?time=' + new Date()
     },
     // 点击登录按钮
     async login () {
@@ -196,7 +196,24 @@ export default {
           this.userInfo = { message: '登录失败，手机号或验证码错误' }
         }
       } else {  //账号密码登录
-
+          // 前端校验
+          if (!this.user_name) {
+          Toast('请输入用户名/邮箱')
+          return
+        } else if (!this.pwd) {
+          Toast('请输入密码')
+          return
+        }else if(!this.captcha){
+          Toast('请输入验证码')
+          return
+        }
+        // 用户名和密码登录
+        const result = await pwdLogin(this.user_name, this.pwd,this.captcha)
+        if (result.success_code === 200) {
+          this.userInfo = result.message
+        } else {
+          this.userInfo = { message: '登录失败,账号或密码错误' }
+        }
       }
 
       // 后续处理

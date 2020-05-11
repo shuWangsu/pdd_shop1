@@ -11,6 +11,9 @@ export default {
   name: 'App',
   components: {
     TabBar
+  },
+  created(){
+    this.$store.dispatch('getUserInfo')
   }
 }
 </script>
